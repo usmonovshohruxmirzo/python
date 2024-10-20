@@ -86,17 +86,132 @@ print(y)
 # 10 * 2^2 = 10 * 4 = 40
 
 
-# x <<= 2
-# print(x)
+# ============================= Comparison Operators
 
-# print(x := 2)
+print(10 == 10)
+print(10 == "10")
+print("10" == "10")
+print(10 != "10")
+print(10 > 5)
+print(10 < 5)
+print(10 <= 5)
+print(10 >= 10)
 
-# Comparison Operators
 
-# Logical Operators
+# ============================= Logical Operators
 
-# Identity Operators
+# e = 20
+# r = 15
+#
+# print(e > 10 and r > 10) # and: &&
+# print(e > 10 or r > 50) # or: ||
+# print(not (e > 50 and r > 50)) # not: !
 
-# Bitwise Operators
 
-# Operator Precedence
+# ============================= Identity Operators
+
+# p = 8
+# q = 8
+# print(p is q)
+# print(p is not q)
+
+# ============================= Operator Precedence
+
+"""
+Operator precedence determines the order in which operators are evaluated in expressions. Operators with higher precedence are evaluated before those with lower precedence.
+"""
+
+"""
+1. **Parentheses `()`**
+   - Highest precedence: expressions inside parentheses are evaluated first.
+
+2. **Exponents `**`**
+   - Right-to-left: `2 ** 3 ** 2` is evaluated as `2 ** (3 ** 2)`.
+
+3. **Unary operators `+`, `-`, `~`**
+   - These include positive, negative, and bitwise NOT.
+
+4. **Multiplication `*`, Division `/`, Floor Division `//`, Modulus `%`**
+   - Evaluated left to right.
+
+5. **Addition `+`, Subtraction `-`**
+   - Also left to right.
+
+6. **Bitwise Shift `<<`, `>>`**
+
+7. **Bitwise AND `&`**
+
+8. **Bitwise XOR `^`**
+
+9. **Bitwise OR `|`**
+
+10. **Comparison `==`, `!=`, `<`, `>`, `<=`, `>=`**
+
+11. **Logical AND `and`**
+
+12. **Logical OR `or`**
+
+13. **Assignment `=`, `+=`, `-=`, `*=`, `/=`, etc.**
+   - Lowest precedence.
+"""
+
+# ============================= Bitwise Operators
+# === Bitwise AND &
+# o = 0b011 # 011 -> 3
+# s = 0b111 # 111 -> 7
+#
+# # 0 & 1 = 0
+# # 1 & 1 = 1
+# # 1 & 1 = 1
+# # 011 -> 3
+#
+# print(o & s) # 3
+
+# === Bitwise OR &
+# o = 0b011 # 011 -> 3
+# s = 0b111 # 111 -> 7
+#
+# # 0 | 1 = 1
+# # 1 | 1 = 1
+# # 1 | 1 = 1
+# # 111 -> 7
+#
+# print(o | s) # 7
+
+# === Bitwise XOR ^
+# o = 0b011 # 011 -> 3
+# s = 0b111 # 111 -> 7
+#
+# # 0 ^ 1 = 1
+# # 1 ^ 1 = 0
+# # 1 ^ 1 = 0
+# # 100 -> 4
+#
+# print(o ^ s)
+
+# === Bitwise NOT ~ inverting bits 1 to 0, 0 to 1
+# In two's complement, ~n = -(n + 1) for any integer n.
+# ~3 = -(3 + 1) = -4
+o = 0b011 # 011 -> 3
+s = ~o # 0b100 -> -4
+print(s, bin(s))
+
+# === Bitwise left shift <<
+# a = 0b011
+# print(bin(a))
+# a = a << 5 #  shift left by pushing zeros in from the right and letting the leftmost bits fall off
+# print(bin(a))
+
+# === Bitwise right shift >>
+# a = 0b011010
+# print(bin(a))
+# a = a >> 2 # Shift all bits two places to the right. 10 falls off
+# print(bin(a))
+
+
+
+
+# walrus operator
+x = 40
+x <<= 2
+print(x := 2)
