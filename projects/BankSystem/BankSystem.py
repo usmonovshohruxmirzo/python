@@ -132,10 +132,15 @@ class Bank:
         except FileNotFoundError:
             print(f"{account_name} not found")
 
-    def display_all_accounts(self):
-        accounts = self.accounts
-        for account in accounts:
-            print(account.account_number, account.account_name)
+    @staticmethod
+    def display_all_accounts():
+        for filename in os.listdir("accounts"):
+            if filename.endswith(".txt"):
+                file_path = os.path.join("accounts", filename)
+                with open(file_path, "r") as read_file:
+                    print(f"Details of *{filename.replace(".txt", "")}*")
+                    print(read_file.read())
+                    print("-----------------------------------")
 
     @staticmethod
     def delete_all_accounts():
@@ -235,6 +240,9 @@ def run_system():
                 bank.get_account_balance(account_name)
             else:
                 print("⚠️", account_name, "is not found")
+
+        elif option == "show all accounts":
+            bank.display_all_accounts()
 
         elif option == "exit":
             print("exiting...")
