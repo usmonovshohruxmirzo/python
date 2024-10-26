@@ -1,0 +1,5 @@
+- Account Holder: alex
+- Account Number: 4413451211
+- Account Email: alex@gmail.com
+- Account Password: alex4444
+- Balance: $1000.0
