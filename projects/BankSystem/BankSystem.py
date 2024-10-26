@@ -1,23 +1,28 @@
 import os
 import random
 import shutil
+import hashlib
 
 class Account:
     def __init__(self, account_name, account_number, account_email, account_password):
         self.account_name = account_name
         self.account_number = account_number
         self.account_email = account_email
-        self.account_password = account_password
+        self.account_password = self.hash_password(account_password)
         self.balance = 1000.000
+
+    @staticmethod
+    def hash_password(password):
+        return hashlib.sha256(password.encode()).hexdigest()
 
 class Bank:
     def __init__(self):
         self.accounts = []
 
-    def create_account(self, account_name, account_email, account_password):
         if not os.path.exists("accounts"):
             os.mkdir("accounts")
 
+    def create_account(self, account_name, account_email, account_password):
         if os.path.exists(f"accounts/{account_name}.txt"):
             print(account_name, "already exists")
             return None
@@ -75,6 +80,14 @@ class Bank:
             print(account_name, "not found")
 
     @staticmethod
+    def get_account_balance(account_name):
+        with open(f"accounts/{account_name}.txt", "r") as read_file:
+            for line in read_file:
+                if line.startswith("- Balance:"):
+                    return float(line.split("$")[-1].strip())
+        return 0.00
+
+    @staticmethod
     def deposit(account_name, amount):
         with open(f"accounts/{account_name}.txt", "r") as read_file:
             data = read_file.readlines()
@@ -110,11 +123,14 @@ class Bank:
 
     @staticmethod
     def delete_account(account_name):
-        if os.path.exists(f"accounts/{account_name}.txt"):
-            os.remove(f"accounts/{account_name}.txt")
-            print(account_name, "is deleted successfully")
-        else:
-            print(account_name, "is not found")
+        try:
+            if os.path.exists(f"accounts/{account_name}.txt"):
+                os.remove(f"accounts/{account_name}.txt")
+                print(account_name, "is deleted successfully")
+            else:
+                print(account_name, "is not found")
+        except FileNotFoundError:
+            print(f"{account_name} not found")
 
     def display_all_accounts(self):
         accounts = self.accounts
@@ -129,12 +145,13 @@ class Bank:
                print("all accounts removed from bank")
            else:
                print("The Folder does not exist")
-       except():
-           print("error has occurred")
+       except FileNotFoundError:
+           print("No accounts to delete")
 
 
 def run_system():
     bank = Bank()
+
     print("-----------------------------------")
     print("- Create a new account: *create*")
     print("- Update an account: *update*")
@@ -143,6 +160,7 @@ def run_system():
     print("- Find account: *find*")
     print("- Deposit to account: *deposit*")
     print("- Withdraw money: *withdraw*")
+    print("- Show all accounts: *show all*")
     print("- Exit from Bank: *exit*")
     print("-----------------------------------")
 
@@ -207,6 +225,14 @@ def run_system():
             if os.path.exists(f"accounts/{account_name}.txt"):
                 amount = input("enter withdraw amount: ")
                 bank.withdraw(account_name, amount)
+            else:
+                print("⚠️", account_name, "is not found")
+
+        elif option == "get balance":
+            account_name = input("enter you account name: ")
+
+            if os.path.exists(f"accounts/{account_name}.txt"):
+                bank.get_account_balance(account_name)
             else:
                 print("⚠️", account_name, "is not found")
 

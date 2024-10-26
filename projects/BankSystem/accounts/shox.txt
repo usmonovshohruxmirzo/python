@@ -1,0 +1,5 @@
+- Account Holder: shox
+- Account Number: 9017705094
+- Account Email: usmonov@gmail.com
+- Account Password: usmonovdev777
+- Balance: $1000.0

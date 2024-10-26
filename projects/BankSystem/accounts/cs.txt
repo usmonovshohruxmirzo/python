@@ -1,5 +1,0 @@
-- Account Holder: cs
-- Account Number: s
-- Account Email: s
-- Account Password: a
-- Balance - $1060

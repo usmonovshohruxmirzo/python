@@ -1,0 +1,5 @@
+- Account Holder: sadasd
+- Account Number: 1831572078
+- Account Email: asdasdas
+- Account Password: dasdsdasd
+- Balance: $1000.0
