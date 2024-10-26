@@ -47,12 +47,21 @@ class Bank:
     @staticmethod
     def update_account(account_name, new_account_name, new_account_number, new_account_email, new_account_password):
         if os.path.exists(f"accounts/{account_name}.txt"):
+            with open(f"accounts/{account_name}.txt", "r") as read_file:
+                lines = read_file.readlines()
+
             with open(f"accounts/{account_name}.txt", "w") as update_file:
-                update_file.write(f"- Account Holder: {new_account_name}\n")
-                update_file.write(f"- Account Number: {new_account_number}\n")
-                update_file.write(f"- Account Email: {new_account_email}\n")
-                update_file.write(f"- Account Password: {new_account_password}\n")
-                update_file.write(f"- Balance: ${0}")
+                for line in lines:
+                    if new_account_name and line.startswith("- Account Holder:"):
+                        update_file.write(f"- Account Holder: {new_account_name}\n")
+                    elif new_account_number and line.startswith("- Account Number:"):
+                        update_file.write(f"- Account Number: {new_account_number}\n")
+                    elif new_account_email and line.startswith("- Account Email:"):
+                        update_file.write(f"- Account Email: {new_account_email}\n")
+                    elif new_account_password and line.startswith("- Account Password:"):
+                        update_file.write(f"- Account Password: {new_account_password}\n")
+                    else:
+                        update_file.write(line)
 
             os.rename(f"accounts/{account_name}.txt", f"accounts/{new_account_name}.txt")
             print(f"accounts/{account_name}.txt updated successfully")
@@ -67,6 +76,19 @@ class Bank:
                 print("-----------------------------------")
         else:
             print(account_name, "not found")
+
+    @staticmethod
+    def deposit(account_name, amount):
+        if os.path.exists(f"accounts/{account_name}.txt"):
+            with open(f"accounts/{account_name}.txt", "r") as update_file:
+                data = update_file.readlines()
+
+            data[len(data) - 1] = f"- Balance - ${amount}"
+
+            with open(f"accounts/{account_name}.txt", "w") as update_file:
+                update_file.writelines(data)
+
+            print(f"${amount} deposited successfully")
 
     @staticmethod
     def delete_account(account_name):
@@ -148,6 +170,11 @@ def run_system():
         elif option == "find":
             account_name = input("enter your account name: ")
             bank.find_account(account_name)
+
+        elif option == "deposit":
+            account_name = input("enter account name")
+            amount = input("enter amount")
+            bank.deposit(account_name, amount)
 
         elif option == "exit":
             print("exiting...")
