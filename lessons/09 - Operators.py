@@ -212,6 +212,20 @@ print(s, bin(s))
 
 
 # walrus operator
-x = 40
-x <<= 2
-print(x := 2)
+# x = 40
+# x <<= 2
+# print(x := 2)
+
+
+
+a = 19
+a %= 4
+print(a)
+
+class Number:
+    def __init__(self,value):
+        self.value = value
+        
+a = Number(17)
+b = Number(17)
+print(a is b)

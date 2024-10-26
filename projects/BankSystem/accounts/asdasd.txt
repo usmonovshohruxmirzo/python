@@ -1,0 +1,5 @@
+- Account Holder: asdasd
+- Account Number: 3308829689
+- Account Email: asd
+- Account Password: asdasdasd
+- Balance: $1000.0

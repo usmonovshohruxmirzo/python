@@ -1,0 +1,160 @@
+import os
+import random
+import shutil
+
+class Account:
+    def __init__(self, account_name, account_number, account_email, account_password):
+        self.account_name = account_name
+        self.account_number = account_number
+        self.account_email = account_email
+        self.account_password = account_password
+        self.balance = 1000.000
+
+    def get_balance(self):
+        return self.balance
+
+class Bank:
+    def __init__(self):
+        self.accounts = []
+
+    def create_account(self, account_name, account_email, account_password):
+        if not os.path.exists("accounts"):
+            os.mkdir("accounts")
+
+        if os.path.exists(f"accounts/{account_name}.txt"):
+            print(account_name, "already exists")
+            return None
+
+        account_number = random.randint(1000000000, 9999999999)
+
+        while any(acc.account_number == account_number for acc in self.accounts):
+            account_number = random.randint(1000000000, 9999999999)
+
+        new_account = Account(account_name, account_number, account_email, account_password)
+        self.accounts.append(new_account)
+
+        with open(f"accounts/{account_name}.txt", "w") as create_file:
+            create_file.write(f"- Account Holder: {account_name}\n")
+            create_file.write(f"- Account Number: {account_number}\n")
+            create_file.write(f"- Account Email: {account_email}\n")
+            create_file.write(f"- Account Password: {account_password}\n")
+            create_file.write(f"- Balance: ${new_account.balance}")
+
+        print(account_name, "is successfully created!")
+
+        return new_account
+
+    @staticmethod
+    def update_account(account_name, new_account_name, new_account_number, new_account_email, new_account_password):
+        if os.path.exists(f"accounts/{account_name}.txt"):
+            with open(f"accounts/{account_name}.txt", "w") as update_file:
+                update_file.write(f"- Account Holder: {new_account_name}\n")
+                update_file.write(f"- Account Number: {new_account_number}\n")
+                update_file.write(f"- Account Email: {new_account_email}\n")
+                update_file.write(f"- Account Password: {new_account_password}\n")
+                update_file.write(f"- Balance: ${0}")
+
+            os.rename(f"accounts/{account_name}.txt", f"accounts/{new_account_name}.txt")
+            print(f"accounts/{account_name}.txt updated successfully")
+
+    @staticmethod
+    def find_account(account_name):
+        if os.path.exists(f"accounts/{account_name}.txt"):
+            with open(f"accounts/{account_name}.txt", "r") as read_file:
+                print(account_name, "is found")
+                print("-----------------------------------")
+                print(read_file.read())
+                print("-----------------------------------")
+        else:
+            print(account_name, "not found")
+
+    @staticmethod
+    def delete_account(account_name):
+        if os.path.exists(f"accounts/{account_name}.txt"):
+            os.remove(f"accounts/{account_name}.txt")
+            print(account_name, "is deleted successfully")
+        else:
+            print(account_name, "is not found")
+
+    def display_all_accounts(self):
+        accounts = self.accounts
+        for account in accounts:
+            print(account.account_number, account.account_name)
+
+    @staticmethod
+    def delete_all_accounts():
+       try:
+           if os.path.exists("accounts"):
+               shutil.rmtree("accounts")
+               print("all accounts removed from bank")
+           else:
+               print("The Folder does not exist")
+       except():
+           print("error has occurred")
+
+
+def run_system():
+    bank = Bank()
+    print("-----------------------------------")
+    print("- Create a new account: *create*")
+    print("- Delete an account: *delete*")
+    print("- Delete all account: *delete all*")
+    print("- Find account: *find*")
+    print("- Exit from Bank: *exit*")
+    print("-----------------------------------")
+
+    option = input("choose an option: ")
+
+    try:
+        if option == "create":
+            account_name = input("enter account name: ")
+            account_email = input("enter your email")
+            account_password = input("enter your password")
+            loading = 0
+
+            for x in range(0, 100):
+                loading += 1
+                print(f"%{loading}")
+
+            if loading == 100:
+                bank.create_account(account_name, account_email, account_password)
+
+        elif option == "delete all":
+            confirm = input("are you sure? yes/no: ")
+            if confirm == "yes":
+                loading = 0
+                for x in range(0, 100):
+                    loading += 1
+                    print(f"%{loading}")
+
+                if loading == 100:
+                    bank.delete_all_accounts()
+            else:
+                print("canceled successfully")
+
+        elif option == "delete":
+            account_name = input("enter your account name: ")
+            bank.delete_account(account_name)
+
+        elif option == "update":
+            account_name = input("enter your account name: ")
+            new_account_name = input("enter your new account name: ")
+            new_account_number = input("enter your new account number: ")
+            new_account_email = input("enter your new account email: ")
+            new_account_password = input("enter your new account password: ")
+
+            bank.update_account(account_name, new_account_name, new_account_number, new_account_email, new_account_password)
+
+        elif option == "find":
+            account_name = input("enter your account name: ")
+            bank.find_account(account_name)
+
+        elif option == "exit":
+            print("exiting...")
+
+        else: print("unknown option")
+    except():
+        print("error has occurred")
+    finally: print("system is off")
+
+run_system()
