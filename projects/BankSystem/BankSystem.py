@@ -137,9 +137,12 @@ def run_system():
     bank = Bank()
     print("-----------------------------------")
     print("- Create a new account: *create*")
+    print("- Update an account: *update*")
     print("- Delete an account: *delete*")
     print("- Delete all account: *delete all*")
     print("- Find account: *find*")
+    print("- Deposit to account: *deposit*")
+    print("- Withdraw money: *withdraw*")
     print("- Exit from Bank: *exit*")
     print("-----------------------------------")
 
