@@ -10,9 +10,6 @@ class Account:
         self.account_password = account_password
         self.balance = 1000.000
 
-    def get_balance(self):
-        return self.balance
-
 class Bank:
     def __init__(self):
         self.accounts = []
@@ -79,16 +76,37 @@ class Bank:
 
     @staticmethod
     def deposit(account_name, amount):
-        if os.path.exists(f"accounts/{account_name}.txt"):
-            with open(f"accounts/{account_name}.txt", "r") as update_file:
-                data = update_file.readlines()
+        with open(f"accounts/{account_name}.txt", "r") as read_file:
+            data = read_file.readlines()
 
-            data[len(data) - 1] = f"- Balance - ${amount}"
+        balance = data[len(data) - 1][13:]
+        balance = int(balance) + int(amount)
 
-            with open(f"accounts/{account_name}.txt", "w") as update_file:
-                update_file.writelines(data)
+        data[len(data) - 1] = f"- Balance - ${balance}"
 
-            print(f"${amount} deposited successfully")
+        with open(f"accounts/{account_name}.txt", "w") as update_file:
+            update_file.writelines(data)
+
+        print(f"+${amount} deposited successfully")
+
+    @staticmethod
+    def withdraw(account_name, amount):
+        with open(f"accounts/{account_name}.txt", "r") as read_file:
+            data = read_file.readlines()
+
+        balance = data[len(data) - 1][13:]
+
+        if int(amount) > int(balance):
+            print("you have not enough money to withdraw")
+            return None
+
+        data[len(data) - 1] = f"- Balance - ${int(balance) - int(amount)}"
+
+        with open(f"accounts/{account_name}.txt", "w") as update_file:
+            update_file.writelines(data)
+
+        print(f"-${amount} withdraw successfully")
+
 
     @staticmethod
     def delete_account(account_name):
@@ -172,9 +190,22 @@ def run_system():
             bank.find_account(account_name)
 
         elif option == "deposit":
-            account_name = input("enter account name")
-            amount = input("enter amount")
-            bank.deposit(account_name, amount)
+            account_name = input("enter account name: ")
+
+            if os.path.exists(f"accounts/{account_name}.txt"):
+                amount = input("enter deposit amount: ")
+                bank.deposit(account_name, amount)
+            else:
+                print("⚠️", account_name, "is not found")
+
+        elif option == "withdraw":
+            account_name = input("enter account name: ")
+
+            if os.path.exists(f"accounts/{account_name}.txt"):
+                amount = input("enter withdraw amount: ")
+                bank.withdraw(account_name, amount)
+            else:
+                print("⚠️", account_name, "is not found")
 
         elif option == "exit":
             print("exiting...")
