@@ -47,7 +47,7 @@ class Bank:
         return new_account
 
     @staticmethod
-    def update_account(account_name, new_account_name, new_account_number, new_account_email, new_account_password):
+    def update_account(account_name, new_account_name=None, new_account_number=None, new_account_email=None, new_account_password=None):
         if os.path.exists(f"accounts/{account_name}.txt"):
             with open(f"accounts/{account_name}.txt", "r") as read_file:
                 lines = read_file.readlines()
@@ -61,12 +61,14 @@ class Bank:
                     elif new_account_email and line.startswith("- Account Email:"):
                         update_file.write(f"- Account Email: {new_account_email}\n")
                     elif new_account_password and line.startswith("- Account Password:"):
-                        update_file.write(f"- Account Password: {new_account_password}\n")
+                        update_file.write(f"- Account Password: {Account.hash_password(new_account_password)}\n")
                     else:
                         update_file.write(line)
-
-            os.rename(f"accounts/{account_name}.txt", f"accounts/{new_account_name}.txt")
-            print(f"accounts/{account_name}.txt updated successfully")
+            if new_account_name and new_account_name != account_name:
+                os.rename(f"accounts/{account_name}.txt", f"accounts/{new_account_name}.txt")
+            print(f"{account_name} updated successfully")
+        else:
+            print(f"Account '{account_name}' does not exist.")
 
     @staticmethod
     def find_account(account_name):
@@ -89,18 +91,26 @@ class Bank:
 
     @staticmethod
     def deposit(account_name, amount):
+        try:
+            amount = float(amount)
+        except ValueError:
+            print("Invalid amount. Please enter a numeric value.")
+            return
+
         with open(f"accounts/{account_name}.txt", "r") as read_file:
             data = read_file.readlines()
 
-        balance = data[len(data) - 1][13:]
-        balance = int(balance) + int(amount)
+        balance_line = data[-1]
+        balance = float(balance_line.split("$")[-1].strip())
 
-        data[len(data) - 1] = f"- Balance - ${balance}"
+        balance += amount
+
+        data[-1] = f"- Balance - ${balance:.2f}\n"
 
         with open(f"accounts/{account_name}.txt", "w") as update_file:
             update_file.writelines(data)
 
-        print(f"+${amount} deposited successfully")
+        print(f"+${amount:.2f} deposited successfully")
 
     @staticmethod
     def withdraw(account_name, amount):
@@ -174,8 +184,8 @@ def run_system():
     try:
         if option == "create":
             account_name = input("enter account name: ")
-            account_email = input("enter your email")
-            account_password = input("enter your password")
+            account_email = input("enter your email: ")
+            account_password = input("enter your password: ")
             loading = 0
 
             for x in range(0, 100):
