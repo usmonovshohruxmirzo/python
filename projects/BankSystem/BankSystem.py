@@ -181,85 +181,90 @@ def run_system():
 
     option = input("choose an option: ")
 
-    try:
-        if option == "create":
-            account_name = input("enter account name: ")
-            account_email = input("enter your email: ")
-            account_password = input("enter your password: ")
-            loading = 0
+    if option == "create":
+        try:
+            if UnicodeEncodeError:
+                account_name = input("enter account name: ")
 
-            for x in range(0, 100):
-                loading += 1
-                print(f"%{loading}")
+                account_name.encode("ascii")
 
-            if loading == 100:
-                bank.create_account(account_name, account_email, account_password)
+                account_email = input("enter your email: ")
+                account_password = input("enter your password: ")
 
-        elif option == "delete all":
-            confirm = input("are you sure? yes/no: ")
-            if confirm == "yes":
                 loading = 0
                 for x in range(0, 100):
                     loading += 1
                     print(f"%{loading}")
 
                 if loading == 100:
-                    bank.delete_all_accounts()
-            else:
-                print("canceled successfully")
+                    bank.create_account(account_name, account_email, account_password)
+        except UnicodeEncodeError:
+            print("⚠️ pls do not use any emojis for file name")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
-        elif option == "delete":
-            account_name = input("enter your account name: ")
-            bank.delete_account(account_name)
+    elif option == "delete all":
+        confirm = input("are you sure? yes/no: ")
+        if confirm == "yes":
+            loading = 0
+            for x in range(0, 100):
+                loading += 1
+                print(f"%{loading}")
 
-        elif option == "update":
-            account_name = input("enter your account name: ")
-            new_account_name = input("enter your new account name: ")
-            new_account_number = input("enter your new account number: ")
-            new_account_email = input("enter your new account email: ")
-            new_account_password = input("enter your new account password: ")
+            if loading == 100:
+                bank.delete_all_accounts()
+        else:
+            print("canceled successfully")
 
-            bank.update_account(account_name, new_account_name, new_account_number, new_account_email, new_account_password)
+    elif option == "delete":
+        account_name = input("enter your account name: ")
+        bank.delete_account(account_name)
 
-        elif option == "find":
-            account_name = input("enter your account name: ")
-            bank.find_account(account_name)
+    elif option == "update":
+        account_name = input("enter your account name: ")
+        new_account_name = input("enter your new account name: ")
+        new_account_number = input("enter your new account number: ")
+        new_account_email = input("enter your new account email: ")
+        new_account_password = input("enter your new account password: ")
 
-        elif option == "deposit":
-            account_name = input("enter account name: ")
+        bank.update_account(account_name, new_account_name, new_account_number, new_account_email, new_account_password)
 
-            if os.path.exists(f"accounts/{account_name}.txt"):
-                amount = input("enter deposit amount: ")
-                bank.deposit(account_name, amount)
-            else:
-                print("⚠️", account_name, "is not found")
+    elif option == "find":
+        account_name = input("enter your account name: ")
+        bank.find_account(account_name)
 
-        elif option == "withdraw":
-            account_name = input("enter account name: ")
+    elif option == "deposit":
+        account_name = input("enter account name: ")
 
-            if os.path.exists(f"accounts/{account_name}.txt"):
-                amount = input("enter withdraw amount: ")
-                bank.withdraw(account_name, amount)
-            else:
-                print("⚠️", account_name, "is not found")
+        if os.path.exists(f"accounts/{account_name}.txt"):
+            amount = input("enter deposit amount: ")
+            bank.deposit(account_name, amount)
+        else:
+            print("⚠️", account_name, "is not found")
 
-        elif option == "get balance":
-            account_name = input("enter you account name: ")
+    elif option == "withdraw":
+        account_name = input("enter account name: ")
 
-            if os.path.exists(f"accounts/{account_name}.txt"):
-                bank.get_account_balance(account_name)
-            else:
-                print("⚠️", account_name, "is not found")
+        if os.path.exists(f"accounts/{account_name}.txt"):
+            amount = input("enter withdraw amount: ")
+            bank.withdraw(account_name, amount)
+        else:
+            print("⚠️", account_name, "is not found")
 
-        elif option == "show all accounts":
-            bank.display_all_accounts()
+    elif option == "get balance":
+        account_name = input("enter you account name: ")
 
-        elif option == "exit":
-            print("exiting...")
+        if os.path.exists(f"accounts/{account_name}.txt"):
+            bank.get_account_balance(account_name)
+        else:
+            print("⚠️", account_name, "is not found")
 
-        else: print("unknown option")
-    except():
-        print("error has occurred")
-    finally: print("system is off")
+    elif option == "show all accounts":
+        bank.display_all_accounts()
+
+    elif option == "exit":
+        print("exiting...")
+
+    else: print("unknown option")
 
 run_system()
