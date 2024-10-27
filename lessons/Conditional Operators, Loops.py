@@ -68,6 +68,7 @@ match number:
         print("two")
     case 3:
         print("three")
+    case _: print("not found")  # case _ == `default` in JS
 
 # ternary operator
 name = "alex"
