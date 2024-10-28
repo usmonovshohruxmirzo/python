@@ -79,3 +79,101 @@ num = 15
 num_2 = 2
 num_result = f"correct, {num} is greater than {num_2}" if num > num_2 else f"wrong, {num} is less than {num_2}"
 print(num_result)
+
+
+# Loops
+# The while Loop - The loop runs while the condition expression is true.
+# x = int(input("Please input 0 to stop iteration: "))
+# sum_result = 0
+# while x:
+#     sum_result  += x
+#     x = int(input("Please input 0 to stop iteration: "))
+# print(sum_result)
+
+
+# continue
+# n = int(input("Input integer number: "))
+# sum_result = 0
+# x = 1
+#
+# while x < n:
+#     x += 1
+#     if x % 2:
+#         continue
+#     sum_result += x
+# print(print(f"Sum of even numbers: {sum_result}"))
+
+# break
+# x = int(input("Imput integer number: "))
+# is_prime = True
+# div = 2
+#
+# while div < x:
+#     if not x % div:
+#         is_prime = False
+#         break
+#     div += 1
+# if is_prime:
+#     print("Prime")
+# else: print("Not prime")
+
+
+# else
+# x = 1
+# while x < 5:
+#     print(x)
+#     x += 1
+# else: print(f"Loop was stopped at: {x}")
+
+# The for Loop
+
+# for i in range(0, 10, 2):
+#     print(i)
+
+# words = ['cat', 'window', 'defenestrate']
+# for word in words:
+#     print(word, len(word))
+
+# num = int(input("enter num"))
+# for i in range(10):
+#     if num == i:
+#         for a in range(10):
+#             print(f"{i} * {a} = {i * a}")
+
+
+# Solving Problems
+# Example 1: Number Analysis
+# numbers_input = input("Enter a series of numbers separated by spaces: ")
+# numbers_list = []
+# even_count = 0
+# odd_count = 0
+# for num in range(int(numbers_input)):
+#     numbers_list.append(num)
+#     if num % 2 == 0:
+#         even_count += 1
+#     else:
+#         odd_count += 1
+# print("Count of even numbers:", even_count)
+# print("Count of odd numbers:", odd_count)
+# print(numbers_list)
+
+
+# Example 2: Guessing Game
+import random
+
+secret_number = random.randint(1, 100)
+guess_count = 0
+print("Welcome to the Guessing Game!")
+print("I have selected a number between 1 and 100. Can you guess it?")
+while True:
+    guess = int(input("Enter your guess: "))
+    guess_count += 1
+    if guess == secret_number:
+        print("🎉 Congratulations! You guessed the correct number in", guess_count, "guesses.")
+        break
+    elif guess > secret_number:
+        print("Too high! Try guessing a lower number.")
+    elif guess < secret_number:
+        print("Too low! Try guessing a higher number.")
+    else:
+        print("try Again")
