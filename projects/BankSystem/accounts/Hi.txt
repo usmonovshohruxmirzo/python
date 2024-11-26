@@ -1,5 +1,0 @@
-- Account Holder: Hi
-- Account Number: 8464545sadasd
-- Account Email: asdasdasd
-- Account Password: 66b1132a0173910b01ee3a15ef4e69583bbf2f7f1e4462c99efbe1b9ab5bf808
-- Balance: $1000.0
