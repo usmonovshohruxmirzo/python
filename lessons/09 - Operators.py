@@ -229,3 +229,8 @@ class Number:
 a = Number(17)
 b = Number(17)
 print(a is b)
+
+# pass is a do-nothing statement in Python. It’s used as a placeholder in empty functions, classes, or loops to avoid errors.
+
+def my_function():
+    pass  # Function does nothing for now
