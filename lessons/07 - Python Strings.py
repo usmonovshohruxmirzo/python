@@ -206,3 +206,49 @@ print("Hello Sam!".translate({83: 80}))
 print("hello".upper()) # Converts a string into upper case
 
 print("50".zfill(10)) # Fills the string with a specified number of 0 values at the beginning
+
+
+a = "Hello World!"
+print(a[-1])
+print(a[::-1])
+
+
+a = "hello"
+b = "bye"
+print("%s %s" % (a, b))
+
+
+print("hello hello hello".capitalize())
+print("hello hello hello".title())
+
+a = "Argentina - Jamaica"
+b = 5
+c = 0
+print(len("{} {} : {}".format(a, b, c)))
+print(a[5:15])
+
+a = "To be, or not to be:"
+a += " that is the question"
+be = a.split("be")
+print(len(be))
+
+
+a = "To be, or not to be:"
+print(a.find("be"))
+
+a = "To be, or not to be:"
+a += " that is the question"
+
+# for i in a.lower().split(" "):
+#     if "t" in i:
+#         count+=1
+
+# print(count)
+
+b = (a.replace(",", "").replace(":", "").split(" "))
+count = 0
+for i in b:
+    if len(i) > 3:
+        count += 1
+    
+print(count)
