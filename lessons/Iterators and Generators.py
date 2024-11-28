@@ -50,10 +50,32 @@ class EvenNumbers:
         raise StopIteration              # Stop when the range is exhausted
 
 
-print("evens:")
-evens = EvenNumbers(3, 10)
-for even in evens:
-    print(even)
+class PrimeNumbers:
+    def __init__(self, start, end):
+        self.current = start  
+        self.end = end        
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        while self.current <= self.end:
+            if self.current % 2 == 1:
+                value = self.current
+                self.current += 1
+                return value
+            self.current += 1
+        raise StopIteration
+
+
+print("prime numbers:")
+primes = PrimeNumbers(10, 30)
+for num in primes:
+    print(num)
+
+
+
+
 
 # Generators
 """
