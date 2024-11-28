@@ -210,7 +210,7 @@ print("50".zfill(10)) # Fills the string with a specified number of 0 values at 
 
 a = "Hello World!"
 print(a[-1])
-print(a[::-1])
+print(a[::-1]) # reversing
 
 
 a = "hello"
