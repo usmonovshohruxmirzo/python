@@ -82,10 +82,39 @@ for num in primes:
 Generator: You use yield to automatically create an iterator in a simpler way.
 """
 
-# def counter(start, end):
-#     while start <= end:
-#         yield start
-#         start += 1
+print("Generators:")
+def counter(start, end):
+    while start <= end:
+        yield start
+        start += 1
 
-# for num in counter(1, 3):
-#     print(num)
+for num in counter(1, 3):
+    print(num)
+
+def fibonacci_with_constraints(start, end):
+    # Initial Fibonacci values:
+    # 'a' holds the current Fibonacci number (starting at 0),
+    # 'b' holds the next Fibonacci number (starting at 1).
+    a, b = 0, 1
+
+    # 'index' will track the position of the current Fibonacci number
+    index = 0
+    
+    # The loop runs while the current Fibonacci number 'a' is less than or equal to 'end'.
+    # We stop the loop once 'a' exceeds 'end'.
+    while a <= end:
+        # Check if 'a' is within the desired range [start, end].
+        # If 'a' is greater than or equal to 'start', we yield (return) the Fibonacci number and its index.
+        if a >= start:
+            yield index, a  # Yield a tuple (index, Fibonacci number)
+
+        # Move to the next Fibonacci number:
+        # - The current 'b' becomes the new 'a'.
+        # - The sum of 'a' and 'b' becomes the new 'b'.
+        a, b = b, a + b
+        
+        # Increment the 'index' to keep track of the position of the Fibonacci number.
+        index += 1
+
+for index, fib in fibonacci_with_constraints(10, 50):
+    print(f"Index: {index}, Fibonacci Number: {fib}")
