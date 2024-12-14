@@ -95,3 +95,55 @@ def hello(**info):
         print(key, value)
 
 hello(name="Alex", age=25, city="NYC")
+
+
+# Built-In Function
+
+# abs()
+print(abs(-15))
+print(abs(15.55))
+
+# all - all should be true
+numbers = [1,2,3,4,5,6]
+print(all(num > 3 for num in numbers))
+
+# any - some should be true
+numbers = [1, 2, 3, 0, 4]
+print(any(num > 2 for num in numbers))
+
+# aiter() - Returns an asynchronous iterator from an asynchronous iterable.
+import asyncio
+# async def async_gen():
+#     for i in range(3):
+#         yield i
+#         await asyncio.sleep(1)
+
+# async def main():
+#     async for x in aiter(async_gen()):
+#         print(x)
+
+# asyncio.run(main())
+
+# anext()
+async def async_gen2():
+    yield 1
+    yield 2
+
+async def main2():
+    it = aiter(async_gen2())
+    print(await anext(it))
+    print(await anext(it))
+
+asyncio.run(main2())
+
+
+# ascii()
+print(ascii("Hello"))
+print(ascii('Привет'))
+
+# bin() - Converts an integer to a binary string.
+print(bin(10))
+
+# bool()
+print(bool(0))  
+print(bool(1))  
