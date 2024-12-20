@@ -1,15 +1,29 @@
+"""
+The def statement, which defines the function
+The body, code bits in the middle of the function that do something
+The return statement, which ends the function (optional)
+"""
+
+"""
+1. Coupling
+    Isolation: Functions and classes should be independent, avoiding tight interconnections.
+    Mutable Arguments: Avoid using mutable objects as default arguments to prevent unintended side effects.
+2. Cohesion
+    Single Purpose: Each function or class should perform only one specific task or responsibility.
+3. Size
+    Relatively Small: Keep functions and classes small for better readability and maintainability.
+"""
+
+"""
+Built-in functions — standard functions in Python
+Developer-defined functions — function that are created by developers themselves
+"""
+
+# Developer-defined function
 def add(a, b):
     return a + b
 
 print(add(10,10))
-
-
-# lambada functions
-# A lambda function is a small anonymous function.
-# A lambda function can take any number of arguments, but can only have one expression.
-
-square = lambda x: x ** 2
-print(square(5))
 
 # Recursion
 def recursion(n):
@@ -99,10 +113,6 @@ hello(name="Alex", age=25, city="NYC")
 
 # Built-In Function
 
-# abs()
-print(abs(-15))
-print(abs(15.55))
-
 # all - all should be true
 numbers = [1,2,3,4,5,6]
 print(all(num > 3 for num in numbers))
@@ -147,3 +157,18 @@ print(bin(10))
 # bool()
 print(bool(0))  
 print(bool(1))  
+
+# First-Class Functions
+"""
+Assigned to variables
+Passed as arguments to other functions
+Returned from other functions
+Stored in data structures like lists, dictionaries, etc.
+"""
+
+# lambada functions
+# A lambda function is a small anonymous function.
+# A lambda function can take any number of arguments, but can only have one expression.
+
+square = lambda x: x ** 2
+print(square(5))
