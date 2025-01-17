@@ -198,3 +198,44 @@ class Car:
 driver = Driver("Alice")
 car = Car("Tesla")
 driver.drive(car)
+
+# 3. Aggregation
+class Engine:
+    def __init__(self, power):
+        self.power = power
+
+class Car:
+    def __init__(self, brand, engine):
+        self.brand = brand
+        self.engine = engine
+
+engine = Engine("200 HP")
+car = Car("Toyota", engine)
+print(f"{car.brand} has an engine with {car.engine.power}") 
+
+# 4. Composition
+class Engine:
+    def __init__(self, power):
+        self.power = power
+
+class Car():
+    def __init__(self, brand, power):
+        self.brand = brand
+        self.engine = Engine(power)
+
+
+car = Car("Ford", "250 HP")
+print(f"{car.brand} has an engine with {car.engine.power}")  
+
+# Multiple Inheritance
+class Animal:
+    def __init__(self, name):
+        self.name = name
+class Pet:
+    def __init__(self, owner):
+        self.owner = owner
+
+class Dog(Animal, Pet):
+    def __init__(self, name, owner):
+        Animal.__init__(self, name)
+        Pet.__init__(self, owner)
