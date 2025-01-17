@@ -245,3 +245,31 @@ class Dog(Animal, Pet):
     
 dog = Dog("Buddy", "Alex")
 print(dog.speak(), "Owner:", dog.owner)
+
+# Method Overriding
+class Animal:
+    def speak(self):
+        return "Animal speaks"
+
+class Dog(Animal):
+    def speak(self):
+        return "Dog barks"
+
+print(Animal().speak())
+print(Dog().speak())  
+
+# Using super()
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+    
+    def describe(self):
+        return f"{self.name} is a {self.breed}"
+    
+dog = Dog("Buddy", "Golden Retriever")
+print(dog.describe())
