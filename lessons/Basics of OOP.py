@@ -166,3 +166,35 @@ class Circle(Shape):
 shapes = [Rectangle(3,4), Circle(5)]
 for shape in shapes:
     print(shape.area())
+
+
+#? Relationships Between Classes. Aggregation, Composition, Association
+# Relationships Between Classes
+
+# 1. Inheritance
+class Animal:
+    def speak(self):
+        return "I make a sound"
+
+class Dog(Animal):  # Dog inherits from Animal
+    def speak(self):
+        return "Woof!"
+
+dog = Dog()
+print(dog.speak())  # Output: Woof!
+
+# 2. Association
+class Driver:
+    def __init__(self, name):
+        self.name = name
+
+    def drive(self, car):
+        print(f"{self.name} is driving a {car.brand}")
+
+class Car:
+    def __init__(self, brand):
+        self.brand = brand
+
+driver = Driver("Alice")
+car = Car("Tesla")
+driver.drive(car)
