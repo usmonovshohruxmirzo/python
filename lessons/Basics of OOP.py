@@ -273,3 +273,20 @@ class Dog(Animal):
     
 dog = Dog("Buddy", "Golden Retriever")
 print(dog.describe())
+
+# Inheritance Hierarchy
+class Animal:
+    def speak(self):
+        return "Animal speaks"
+    
+class Mammal(Animal):
+    def walk(self):
+        return "Mammal walks"
+    
+class Dog(Mammal):
+    def speak(self):
+        return "Dog speaks"
+
+dog = Dog()
+print(dog.speak())  
+print(dog.walk()) 
