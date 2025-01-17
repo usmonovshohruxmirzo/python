@@ -239,3 +239,9 @@ class Dog(Animal, Pet):
     def __init__(self, name, owner):
         Animal.__init__(self, name)
         Pet.__init__(self, owner)
+
+    def speak(self):
+        return f"{self.name} says Woof!"
+    
+dog = Dog("Buddy", "Alex")
+print(dog.speak(), "Owner:", dog.owner)
