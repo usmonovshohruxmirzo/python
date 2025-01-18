@@ -122,3 +122,5 @@ def background_task():
 
 thread = threading.Thread(target=background_task)
 thread.start()
+
+root.mainloop()  # Start the GUI loop
