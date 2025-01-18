@@ -62,7 +62,49 @@ button3 = tk.Button(root, text="Right")
 button3.pack(side="right", padx=10, pady=10)
 
 # grid()
-# label2 = tk.Label(root, text="This is a Label")
-# label2.grid(row=0, column=0)
+
+# place()
+button4 = tk.Button(root, text="Placed")
+button4.place(x=100, y=100)
+
+
+# 6. Event Handling
+
+def on_click(e):
+    print("You clicked at", e.x, e.y)
+
+root.bind("<Button-1>", on_click) 
+
+# 7. Themed Widgets with ttk
+button4 = ttk.Button(root, text="Themed Button")
+button4.pack()
+
+
+# 8. Canvas for Drawing
+canvas = tk.Canvas(root, width=200, height=200)
+canvas.pack()
+canvas.create_rectangle(50, 50, 150, 150, fill="blue")
+
+# 9. Menu Bars
+menu = tk.Menu(root)
+root.config(menu=menu)
+file_menu = tk.Menu(menu, tearoff=0)
+file_menu.add_command(label="Open")
+file_menu.add_command(label="Save")
+file_menu.add_command(label="Exit", command=root.quit)
+menu.add_cascade(label="File", menu=file_menu)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 root.mainloop()  # Start the GUI loop

@@ -13,6 +13,15 @@ supabase_headers = {
     "Content-Type": "application/json"
 }
 
+def create_tray_icon():
+    pass
+
+def create_icon_image():
+    pass
+
+def quit_action():
+    pass
+
 def fetch_books_from_psql():
     try:
         conn = psycopg2.connect(
