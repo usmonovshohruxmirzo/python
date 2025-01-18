@@ -62,13 +62,13 @@ def sync_data_from_supabase(cursor, conn):
         if books_data:
             cursor.execute("SELECT id FROM books")
             local_books = cursor.fetchall()
-            local_book_ids = {book[0] for book in local_books}  
+            local_book_ids = {book[0] for book in local_books}
 
             for book in books_data:
                 if book['id'] not in local_book_ids:
                     cursor.execute(f"INSERT INTO books (id, title, book_thumbnail, link) VALUES (%s, %s, %s, %s)",
                                    (book['id'], book['title'], book['book_thumbnail'], book['link']))
-                    local_book_ids.add(book['id'])  
+                    local_book_ids.add(book['id'])
 
             for book_id in local_book_ids:
                 if not any(book['id'] == book_id for book in books_data):
@@ -85,8 +85,8 @@ def sync_data_from_supabase(cursor, conn):
 
 def poll_for_new_data():
     while True:
-        fetch_books_from_psql()  
-        time.sleep(2)
+        fetch_books_from_psql()
+        time.sleep(1)
 
 import time
 polling_thread = threading.Thread(target=poll_for_new_data, daemon=True)
