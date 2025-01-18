@@ -94,17 +94,31 @@ file_menu.add_command(label="Save")
 file_menu.add_command(label="Exit", command=root.quit)
 menu.add_cascade(label="File", menu=file_menu)
 
+# 10. Dialogs
+
+# Message Box
+# from tkinter import messagebox, filedialog
+# messagebox.showinfo("Title", "Message Content")
 
 
+# File Dialog
+# file_path = filedialog.askopenfilename()
 
 
+# 11. Frames
+# frame = tk.Frame(root, bg="blue")
+# frame.pack(fill="both", expand=True)
+
+# 12. Customizing Widgets
+custom_button = tk.Button(root, text="custom button")
+custom_button.pack()
+custom_button.config(bg="blue", fg="white", font=("Arial", 12))
 
 
+# 13. Multithreading. For handling background tasks
+import threading
+def background_task():
+    print("Task running")
 
-
-
-
-
-
-
-root.mainloop()  # Start the GUI loop
+thread = threading.Thread(target=background_task)
+thread.start()
